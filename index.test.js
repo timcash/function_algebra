@@ -4,7 +4,9 @@ const {
   getUserBalanceV1,
   getUserBalanceV2,
   getUserBalanceV3,
-  getValue
+  getValue,
+  isFailure,
+  isSuccess
 } = require('./index')
 
 // ======================================

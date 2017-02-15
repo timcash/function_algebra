@@ -87,7 +87,6 @@ const getUserBalanceV1 = co.wrap(function * (user, logger) {
   return 'not a valid user'
 })
 
-
 // ======================================
 //
 //               SECOND WAY
