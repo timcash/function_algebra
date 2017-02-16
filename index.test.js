@@ -56,6 +56,12 @@ test.skip('should return not a valid user', co.wrap(function * (){
   equal(getValue(result), 'please supply a valid user')
 }))
 
+test.skip('should return user not authenticated', co.wrap(function * (){
+  const result = yield getUserBalanceV2({name: 'jack'}, ()=>{})
+  equal(isFailure(result), true)
+  equal(getValue(result), 'user not authenticated')
+}))
+
 test.skip('should return user had no items', co.wrap(function * (){
   const result = yield getUserBalanceV2({name: 'tim'}, ()=>{})
   equal(isFailure(result), true)
