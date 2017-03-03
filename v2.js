@@ -8,32 +8,14 @@ const { isUserAuthed, getUserData, isValidUser } = require("./api");
 // ======================================
 
 // need to implement these function
-function verifyStep(user) {
-  try {
-    const result = isValidUser(user);
-    if (result) return success(user);
-    return failure("please supply a valid user");
-  } catch (e) {
-    return failure("please supply a valid user");
-  }
+function verifyStep() {
+  return;
 }
-async function authStep(user) {
-  try {
-    const result = await isUserAuthed(user);
-    if (result) return success(user);
-    return failure("user is not authed");
-  } catch (e) {
-    return failure("user is not authed");
-  }
+async function authStep() {
+  return;
 }
-async function userDataStep(user) {
-  try {
-    const result = await getUserData(user);
-    if (result) return success(result);
-    return empty();
-  } catch (e) {
-    return failure(e.toString());
-  }
+async function userDataStep() {
+  return;
 }
 async function balanceStep() {
   return;

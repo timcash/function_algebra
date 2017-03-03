@@ -15,41 +15,41 @@ const { isFailure, isSuccess, payload } = require("./failable");
 //
 // ======================================
 
-test("should not be a valid user", async () => {
+test.skip("should not be a valid user", async () => {
   const result = verifyStep(null);
   equal(isFailure(result), true);
   equal(payload(result), "please supply a valid user");
 });
 
-test("should be a valid user", async () => {
+test.skip("should be a valid user", async () => {
   const user = { name: "bob" };
   const result = verifyStep(user);
   equal(isSuccess(result), true);
   equal(payload(result), user);
 });
 
-test("should not be a authed user", async () => {
+test.skip("should not be a authed user", async () => {
   const user = { name: "bob" };
   const result = await authStep(user);
   equal(isFailure(result), true);
   equal(payload(result), "user is not authed");
 });
 
-test("should be a authed user", async () => {
+test.skip("should be a authed user", async () => {
   const user = { name: "tim" };
   const result = await authStep(user);
   equal(isSuccess(result), true);
   equal(payload(result), user);
 });
 
-test("should return user data for carl", async () => {
+test.skip("should return user data for carl", async () => {
   const user = { name: "carl" };
   const result = await userDataStep(user);
   equal(isSuccess(result), true);
   equal(payload(result), userDB["carl"]);
 });
 
-test("should return price balance for carl", async () => {
+test.skip("should return price balance for carl", async () => {
   // write this one yourself
 });
 
