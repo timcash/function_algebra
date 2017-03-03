@@ -68,7 +68,7 @@ test.skip("should return not a valid user", async () => {
 test.skip("should return user not authenticated", async () => {
   const result = await getUserBalanceV2({ name: "jack" });
   equal(isFailure(result), true);
-  equal(payload(result), "user not authenticated");
+  equal(payload(result), "user not authed");
 });
 
 test.skip("should return user had no items", async () => {
