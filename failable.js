@@ -1,30 +1,27 @@
-function failable (nothing, value, error, meta) {
-  if (nothing) return {nothing, meta}
-  if (value) return {value, meta}
-  if (error) return {error, meta}
-  return {error: 'no failable type', meta}
-}
+const SUCCESS = 0;
+const ERROR = 1;
+const EMPTY = 2;
 
-function success (value, meta) {
-  return failable(false, value, undefined, meta)
-}
+const kind = f => f[0];
+const payload = f => f[1];
+const meta = f => f[2];
 
-function failure (error, meta) {
-  return failable(false, undefined, err, meta)
-}
+const success = (payload, meta) => [SUCCESS, payload, meta];
+const failure = (payload, meta) => [ERROR, payload, meta];
+const empty = meta => [EMPTY, undefined, meta];
 
-function empty (meta) {
-  return failable(true, undefined, undefined, meta)
-}
+const isSuccess = f => kind(f) === SUCCESS;
+const isFailure = f => kind(f) === ERROR;
+const isEmpty = f => kind(f) === EMPTY;
 
-function isSuccess (a) {
-  return a.hasOwnProperty('value')
-}
-
-function isFailure (a) {
-  return a.hasOwnProperty('error')
-}
-
-function isEmpty (a) {
-  return a.hasOwnProperty('nothing')
-}
+module.exports = {
+  kind,
+  payload,
+  meta,
+  success,
+  failure,
+  empty,
+  isSuccess,
+  isFailure,
+  isEmpty
+};

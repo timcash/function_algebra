@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^18.1.0"
+    "jest": "^19.0.0"
   },
   "dependencies": {
+    "jest": "^19.0.2"
   }
 }
