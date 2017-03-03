@@ -1,5 +1,5 @@
-const co = require('co')
 const equal = require('assert').deepEqual
+const co = require('co')
 const {
   getUserBalanceV1,
   getUserBalanceV2,
@@ -15,28 +15,28 @@ const {
 //
 // ======================================
 
-test('should go boom!', co.wrap(function * (){
+test('should go boom!', async () => {
   try {
-    const result = yield getUserBalanceV1(null, ()=>{})
+    const result = await getUserBalanceV1(null, ()=>{})
   } catch (e) {
     equal(e.toString(), 'TypeError: Cannot read property \'name\' of null')
   }
-}))
+})
 
-test('should return not a valid user', co.wrap(function * (){
-  const result = yield getUserBalanceV1({foo: 'bar'}, ()=>{})
+test('should return not a valid user', async () => {
+  const result = await getUserBalanceV1({foo: 'bar'}, ()=>{})
   equal(result, 'not a valid user')
-}))
+})
 
-test('should give a TypeError with no items', co.wrap(function * () {
-  const result = yield getUserBalanceV1({name: 'tim'}, ()=>{})
+test('should give a TypeError with no items', async () => {
+  const result = await getUserBalanceV1({name: 'tim'}, ()=>{})
   equal(result , 'TypeError: Cannot read property \'forEach\' of undefined')
-}))
+})
 
-test('should return the balance', co.wrap(function * (){
-  const result = yield getUserBalanceV1({name: 'carl'}, ()=>{})
+test('should return the balance', async () => {
+  const result = await getUserBalanceV1({name: 'carl'}, ()=>{})
   equal(result, 60)
-}))
+})
 
 // ======================================
 //
@@ -44,35 +44,35 @@ test('should return the balance', co.wrap(function * (){
 //
 // ======================================
 
-test.skip('should NOT go boom!', co.wrap(function * (){
-  const result = yield getUserBalanceV2(null, ()=>{})
+test.skip('should NOT go boom!', async () => {
+  const result = await getUserBalanceV2(null, ()=>{})
   equal(isFailure(result), true)
   equal(getValue(result), 'please supply a valid user')
-}))
+})
 
-test.skip('should return not a valid user', co.wrap(function * (){
-  const result = yield getUserBalanceV2({foo: 'bar'}, ()=>{})
+test.skip('should return not a valid user', async () => {
+  const result = await getUserBalanceV2({foo: 'bar'}, ()=>{})
   equal(isFailure(result), true)
   equal(getValue(result), 'please supply a valid user')
-}))
+})
 
-test.skip('should return user not authenticated', co.wrap(function * (){
-  const result = yield getUserBalanceV2({name: 'jack'}, ()=>{})
+test.skip('should return user not authenticated', async () => {
+  const result = await getUserBalanceV2({name: 'jack'}, ()=>{})
   equal(isFailure(result), true)
   equal(getValue(result), 'user not authenticated')
-}))
+})
 
-test.skip('should return user had no items', co.wrap(function * (){
-  const result = yield getUserBalanceV2({name: 'tim'}, ()=>{})
+test.skip('should return user had no items', async () => {
+  const result = await getUserBalanceV2({name: 'tim'}, ()=>{})
   equal(isFailure(result), true)
   equal(getValue(result), 'tim had no items')
-}))
+})
 
-test.skip('should return 60', co.wrap(function * (){
-  const result = yield getUserBalanceV2({name: 'carl'}, ()=>{})
+test.skip('should return 60', async () => {
+  const result = await getUserBalanceV2({name: 'carl'}, ()=>{})
   equal(isSuccess(result), true)
   equal(getValue(result), 60)
-}))
+})
 
 // ======================================
 //
@@ -80,26 +80,26 @@ test.skip('should return 60', co.wrap(function * (){
 //
 // ======================================
 
-test.skip('should NOT go boom!', co.wrap(function * (){
-  const result = yield getUserBalanceV3(null, ()=>{})
+test.skip('should NOT go boom!', async () => {
+  const result = await getUserBalanceV3(null, ()=>{})
   equal(isFailure(result), true)
   equal(getValue(result), 'please supply a valid user')
-}))
+})
 
-test.skip('should return not a valid user', co.wrap(function * (){
-  const result = yield getUserBalanceV3({foo: 'bar'}, ()=>{})
+test.skip('should return not a valid user', async () => {
+  const result = await getUserBalanceV3({foo: 'bar'}, ()=>{})
   equal(isFailure(result), true)
   equal(getValue(result), 'please supply a valid user')
-}))
+})
 
-test.skip('should return user had no items', co.wrap(function * (){
-  const result = yield getUserBalanceV3({name: 'tim'}, ()=>{})
+test.skip('should return user had no items', async () => {
+  const result = await getUserBalanceV3({name: 'tim'}, ()=>{})
   equal(isFailure(result), true)
   equal(getValue(result), 'tim had no items')
-}))
+})
 
-test.skip('should return 60', co.wrap(function * (){
-  const result = yield getUserBalanceV3({name: 'carl'}, ()=>{})
+test.skip('should return 60', async () => {
+  const result = await getUserBalanceV3({name: 'carl'}, ()=>{})
   equal(isSuccess(result), true)
   equal(getValue(result), 60)
-}))
+})

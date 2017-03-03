@@ -4,8 +4,6 @@
 //
 // ======================================
 
-const co = require('co')
-
 let userDB = {
   carl: {
     items: [
@@ -28,16 +26,16 @@ function isValidUser (u) {
   return false
 }
 
-function isUserAuthed (u) {
+async function isUserAuthed (u) {
   let authed = false
   if (u.name === 'carl') authed = true
   if (u.name === 'tim') authed = true
-  return Promise.resolve(authed)
+  return authed
 }
 
-function getUserData (u) {
+async function getUserData (u) {
   let userData = userDB[u.name]
-  return Promise.resolve(userData)
+  return userData
 }
 
 // ======================================
@@ -46,7 +44,7 @@ function getUserData (u) {
 //
 // ======================================
 
-const getUserBalanceV1 = co.wrap(function * (user, logger) {
+async function getUserBalanceV1 (user, logger) {
   // not looking good
   if(isValidUser(user)) {
     // try inside of if... we have multiple code paths
@@ -60,13 +58,13 @@ const getUserBalanceV1 = co.wrap(function * (user, logger) {
       // even with tests I have ended up with working code
       // because I was not depending on the result of the async
       // operation
-      const authed = yield isUserAuthed(user)
+      const authed = await isUserAuthed(user)
 
       // notice that isUserAuthed and getUserData
       // return different types and I have to think
       // about (wire up) each one in a different way
       if(!authed) return 'not logged in'
-      const userData = yield getUserData(user)
+      const userData = await getUserData(user)
 
       // imperative logic in the coordiation function
       let total = 0
@@ -85,7 +83,7 @@ const getUserBalanceV1 = co.wrap(function * (user, logger) {
     }
   }
   return 'not a valid user'
-})
+}
 
 // ======================================
 //
@@ -104,18 +102,16 @@ function isSuccess () {}
 function getValue () {}
 
 // Notice we still need to think about async and yield
-const getUserBalanceV2 = co.wrap(function * (user, logger) {
+async function getUserBalanceV2 (user) {
   const s1 = step1(user)
   if (isFailure(s1)) return s1
-  // logging like this is a pain how can we get it out of here?
-  logger('the result of this step', s1)
-  const s2 = yield step2(s1)
+  const s2 = await step2(s1)
   if (isFailure(s2)) return s2
-  const s3 = yield step3(s2)
+  const s3 = await step3(s2)
   if (isFailure(s3)) return s3
-  const s4 = yield step4(s3)
+  const s4 = await step4(s3)
   return s4
-})
+}
 
 // ======================================
 //
